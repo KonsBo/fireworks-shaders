@@ -69,9 +69,19 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 /**
  * Fireworks
  */
-const createFirework = () => {};
+const createFirework = (count) => {
+  //Geometry
+  const positionArray = new Float32Array(count * 3);
 
-createFirework();
+  for (let i = 0; i < count; i++) {
+    const i3 = i * 3;
+
+    positionsArray[i3] = Math.random() - 0.5;
+    positionsArray[i3 + 1] = Math.random() - 0.5;
+    positionsArray[i3 + 2] = Math.random() - 0.5;
+  }
+  createFirework(count);
+};
 
 /**
  * Animate
