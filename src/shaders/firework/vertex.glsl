@@ -12,6 +12,12 @@ void main()
 {  
     vec3 newPosition = position;
 
+    // Scaling
+     float sizeOpeningProgress = remap(uProgress, 0.0, 0.125, 0.0, 1.0);
+    float sizeClosingProgress = remap(uProgress, 0.125, 1.0, 1.0, 0.0);
+    float sizeProgress = min(sizeOpeningProgress, sizeClosingProgress);
+     sizeProgress = clamp(sizeProgress, 0.0, 1.0);
+
      // Falling
     float fallingProgress = remap(uProgress, 0.1, 1.0, 0.0, 1.0);
     fallingProgress = clamp(fallingProgress, 0.0, 1.0);
@@ -31,7 +37,7 @@ void main()
  gl_Position = projectionMatrix * viewPosition;
 
  // Final size
- gl_PointSize = uSize * uResolution.y * aSize;;
+ gl_PointSize = uSize * uResolution.y * aSize  * sizeProgress;
  gl_PointSize *= 1.0 / - viewPosition.z;
 
 }
