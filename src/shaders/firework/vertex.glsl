@@ -1,5 +1,6 @@
- uniform float uSize;
+uniform float uSize;
 uniform vec2 uResolution;
+uniform sampler2D uTexture;
  
 void main()
 {
