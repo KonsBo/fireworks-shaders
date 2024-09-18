@@ -214,7 +214,7 @@ const skyParameters = {
 };
 
 function updateSky() {
-  const uniforms = sky.material.uniforms;
+  const  uniforms = sky.material.uniforms;
   uniforms["turbidity"].value = skyParameters.turbidity;
   uniforms["rayleigh"].value = skyParameters.rayleigh;
   uniforms["mieCoefficient"].value = skyParameters.mieCoefficient;
