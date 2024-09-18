@@ -25,12 +25,22 @@ const textureLoader = new THREE.TextureLoader();
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
+  pixelRatio: Math.min(window.devicePixelRatio, 2),
 };
+sizes.resolution = new THREE.Vector2(
+  sizes.width * sizes.pixelRatio,
+  sizes.height * sizes.pixelRatio
+);
 
 window.addEventListener("resize", () => {
   // Update sizes
   sizes.width = window.innerWidth;
   sizes.height = window.innerHeight;
+  sizes.pixelRatio = Math.min(window.devicePixelRatio, 2);
+  sizes.resolution.set(
+    sizes.width * sizes.pixelRatio,
+    sizes.height * sizes.pixelRatio
+  );
 
   // Update camera
   camera.aspect = sizes.width / sizes.height;
@@ -38,7 +48,7 @@ window.addEventListener("resize", () => {
 
   // Update renderer
   renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(sizes.pixelRatio);
 });
 
 /**
@@ -66,7 +76,7 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true,
 });
 renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(sizes.pixelRatio);
 
 /**
  * Fireworks
@@ -94,6 +104,7 @@ const createFirework = (count, position, size) => {
     fragmentShader: fireworkFragmentShader,
     uniforms: {
       uSize: new THREE.Uniform(size),
+      uResolution: new THREE.Uniform(sizes.resolution),
     },
   });
 
@@ -106,7 +117,7 @@ const createFirework = (count, position, size) => {
 createFirework(
   100, // Count
   new THREE.Vector3(), //Position
-  50 //Size
+  0.5 //Size
 );
 
 /**
