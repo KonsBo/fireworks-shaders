@@ -85,6 +85,14 @@ const createFirework = (count) => {
     "position",
     new THREE.Float32BufferAttribute(positionsArray, 3)
   );
+
+  //Material
+  const material = new THREE.PointsMaterial();
+
+  //points
+  const firework = new THREE.Points(geometry, material);
+
+  scene.add(firework);
 };
 createFirework(100);
 
