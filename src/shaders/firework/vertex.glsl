@@ -1,7 +1,9 @@
 uniform float uSize;
 uniform vec2 uResolution;
-attribute float aSize;
 uniform float uProgress;
+attribute float aSize;
+attribute float aTimeMultiplier;
+
 
 float remap(float value, float originMin, float originMax, float destinationMin, float destinationMax)
 {
@@ -11,6 +13,8 @@ float remap(float value, float originMin, float originMax, float destinationMin,
 void main()
 {  
     vec3 newPosition = position;
+
+     float progress = uProgress * aTimeMultiplier;
 
     // Scaling
      float sizeOpeningProgress = remap(uProgress, 0.0, 0.125, 0.0, 1.0);
@@ -33,7 +37,7 @@ void main()
        // Twinkling
     float twinklingProgress = remap(uProgress, 0.2, 0.8, 0.0, 1.0);
     twinklingProgress = clamp(twinklingProgress, 0.0, 1.0);
-     float sizeTwinkling = sin(uProgress * 30.0) * 0.5 + 0.5;
+     float sizeTwinkling = sin(uProgress * 40.0) * 0.5 + 0.5;
       sizeTwinkling = 1.0 - sizeTwinkling * twinklingProgress;
 
 
