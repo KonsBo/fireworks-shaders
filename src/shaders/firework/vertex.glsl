@@ -1,7 +1,7 @@
 uniform float uSize;
 uniform vec2 uResolution;
-uniform sampler2D uTexture;
- 
+attribute float aSize;
+
 void main()
 {
    // Final Position
@@ -10,7 +10,7 @@ void main()
  gl_Position = projectionMatrix * viewPosition;
 
  // Final size
- gl_PointSize = uSize * uResolution.y;
+ gl_PointSize = uSize * uResolution.y * aSize;;
  gl_PointSize *= 1.0 / - viewPosition.z;
 
 }
