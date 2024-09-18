@@ -71,7 +71,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 const createFirework = (count) => {
   //Geometry
-  const positionArray = new Float32Array(count * 3);
+  const positionsArray = new Float32Array(count * 3);
 
   for (let i = 0; i < count; i++) {
     const i3 = i * 3;
@@ -80,8 +80,13 @@ const createFirework = (count) => {
     positionsArray[i3 + 1] = Math.random() - 0.5;
     positionsArray[i3 + 2] = Math.random() - 0.5;
   }
-  createFirework(count);
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(positionsArray, 3)
+  );
 };
+createFirework(100);
 
 /**
  * Animate
